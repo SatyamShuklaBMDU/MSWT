@@ -73,7 +73,7 @@ class AdminController extends Controller
                     return redirect()->back()->with('error_message', 'Your admin account is not active');
 
                 } else { // otherwise, login successfully!
-                    return redirect('/admin/dashboard'); // Let them LOGIN!!
+                    return redirect('/dashboard'); // Let them LOGIN!!
                 }
 
             } else { // If login credentials are incorrect
@@ -84,10 +84,14 @@ class AdminController extends Controller
 
         return view('admin/login');
     }
+    
+    protected function loadlogin(){
+        return view('admin/login');
+    }
 
     public function logout() {
         Auth::guard('admin')->logout(); // Logging out using our 'admin' guard that we created in auth.php    // Accessing Specific Guard Instances: https://laravel.com/docs/9.x/authentication#accessing-specific-guard-instances
-        return redirect('admin/login');
+        return redirect('/');
     }
 
     public function updateAdminPassword(Request $request) {

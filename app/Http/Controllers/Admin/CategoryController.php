@@ -49,15 +49,11 @@ class CategoryController extends Controller
     public function addEditCategory(Request $request, $id = null) { // If the $id is not passed, this means Add a Category, if not, this means Edit the Category    
         // Correcting issues in the Skydash Admin Panel Sidebar using Session
         Session::put('page', 'categories');
-
-
         if ($id == '') { // if there's no $id is passed in the route/URL parameters, this means Add a new Category
             $title = 'Add Category';
             $category = new Category();
             // dd($category);
-
             $getCategories = array(); // An array that contains all the parent categories that are under this section    
-
             $message = 'Category added successfully!';
         } else { // if the $id is passed in the route/URL parameters, this means Edit the Category
             $title = 'Edit Category';
@@ -79,7 +75,7 @@ class CategoryController extends Controller
             $data = $request->all();
             // dd($data);
 
-
+            dd($request->all());
             // Laravel's Validation    // Customizing Laravel's Validation Error Messages: https://laravel.com/docs/9.x/validation#customizing-the-error-messages    // Customizing Validation Rules: https://laravel.com/docs/9.x/validation#custom-validation-rules    
             $rules = [
                 'category_name' => 'required|regex:/^[\pL\s\-]+$/u', // only alphabetical characters and spaces

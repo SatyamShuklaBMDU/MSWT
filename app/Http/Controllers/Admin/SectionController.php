@@ -73,12 +73,16 @@ class SectionController extends Controller
             $section->name   = $data['section_name']; // WHETHER ADDING or UPDATING
             $section->status = 1;  // WHETHER ADDING or UPDATING
             $section->save(); // Save all data in the database
-            return redirect('admin/products')->with('success_message', $message);
+            return redirect('/sections')->with('success_message', $message);
         }
         return view('admin.sections.add_edit_section')->with(compact('title', 'section'));
     }
     public function sectionsFilter(Request $request)
     {
+        $request->validate([
+            'start' => 'required|date',
+            'end' => 'required|date|after_or_equal:start',
+        ]);
         $start = $request->start;
         $end = $request->end;
         $sections=Section::whereBetween('created_at',[$request->start,$request->end])->get();
