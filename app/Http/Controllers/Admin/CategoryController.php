@@ -9,7 +9,7 @@ use Intervention\Image\Facades\Image;
 
 use App\Models\Category;
 use App\Models\Section;
-
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
@@ -49,7 +49,9 @@ class CategoryController extends Controller
     public function addEditCategory(Request $request, $id = null) { // If the $id is not passed, this means Add a Category, if not, this means Edit the Category    
         // Correcting issues in the Skydash Admin Panel Sidebar using Session
         Session::put('page', 'categories');
-        if ($id == '') { // if there's no $id is passed in the route/URL parameters, this means Add a new Category
+        $Did = $id ? decrypt($id) : '';
+        // dd($Did);
+        if ($Did == '') { // if there's no $id is passed in the route/URL parameters, this means Add a new Category
             $title = 'Add Category';
             $category = new Category();
             // dd($category);
@@ -57,7 +59,7 @@ class CategoryController extends Controller
             $message = 'Category added successfully!';
         } else { // if the $id is passed in the route/URL parameters, this means Edit the Category
             $title = 'Edit Category';
-            $category = Category::find($id);
+            $category = Category::find($Did);
             // dd($category->parentCategory);
 
             $getCategories = Category::with('subCategories')->where([ // $getCategories are all the parent categories, and their child categories    
@@ -72,15 +74,15 @@ class CategoryController extends Controller
 
 
         if ($request->isMethod('post')) { // WHETHER Add or Update <form> submission!!
-            $data = $request->all();
             // dd($data);
 
-            dd($request->all());
+            // dd($request->all());
             // Laravel's Validation    // Customizing Laravel's Validation Error Messages: https://laravel.com/docs/9.x/validation#customizing-the-error-messages    // Customizing Validation Rules: https://laravel.com/docs/9.x/validation#custom-validation-rules    
             $rules = [
                 'category_name' => 'required|regex:/^[\pL\s\-]+$/u', // only alphabetical characters and spaces
                 'section_id'    => 'required',
-                'url'           => 'required',
+                'url'           => 'required|regex:/^[\pL\s\-]+$/u', // only alphabetic characters
+                'category_discount' => 'nullable|numeric', // only numeric values, can be nullable
             ];
 
             $customMessages = [ // Specifying A Custom Message For A Given Attribute: https://laravel.com/docs/9.x/validation#specifying-a-custom-message-for-a-given-attribute
@@ -88,9 +90,16 @@ class CategoryController extends Controller
                 'category_name.regex'    => 'Valid Category Name is required',
                 'section_id.required'    => 'Section is required',
                 'url.required'           => 'Category URL is required',
+                'url.alpha'              => 'Category URL can only contain alphabetic characters',
+                'category_discount.numeric' => 'Category discount must be a numeric value',
             ];
+            $validator = Validator::make($request->all(), $rules, $customMessages);
 
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
            // $this->validate($request, $rules, $customMessages);
+           $data = $request->all();
 
 
             if ($data['category_discount'] == '') {
@@ -100,28 +109,26 @@ class CategoryController extends Controller
             
             // Uploading Category Image    // Using the Intervention package for uploading images
          
- if ($request->hasFile('category_image')) {
-    $image_tmp = $request->file('category_image');
-    if ($image_tmp->isValid()) {
-        // Get image extension
-        $extension = $image_tmp->getClientOriginalExtension();
+    if ($request->hasFile('category_image')) {
+            $image_tmp = $request->file('category_image');
+            if ($image_tmp->isValid()) {
+                // Get image extension
+                $extension = $image_tmp->getClientOriginalExtension();
 
-        // Generate a new random name for the uploaded image
-        $imageName = rand(111, 99999) . '.' . $extension; // e.g. 5954.png
+                // Generate a new random name for the uploaded image
+                $imageName = rand(111, 99999) . '.' . $extension; // e.g. 5954.png
 
-        // Upload the image to the public folder
-        $image_tmp->move(public_path('front/images/category_images'), $imageName);
+                // Upload the image to the public folder
+                $image_tmp->move(public_path('front/images/category_images'), $imageName);
 
-        // Insert the image path in the database table
-       $category->category_image = $imageName;
+                // Insert the image path in the database table
+            $category->category_image = $imageName;
 
+            }
     }
-}
- else { // In case the admins updates other fields but doesn't update the image itself (doesn't upload a new image), and originally there wasn't any image uploaded in the first place
+    else { // In case the admins updates other fields but doesn't update the image itself (doesn't upload a new image), and originally there wasn't any image uploaded in the first place
                 $category->category_image = ''; 
             }
-
-
             $category->section_id        = $data['section_id'];
             $category->parent_id         = $data['parent_id'];
             $category->category_name     = $data['category_name'];
@@ -132,18 +139,12 @@ class CategoryController extends Controller
             $category->meta_description  = $data['meta_description'];
             $category->meta_keywords     = $data['meta_keywords'];
             $category->status            = 1;
-
             $category->save(); // Save all data in the database
-
-            return redirect('admin/categories')->with('success_message', $message);
+            return redirect('/categories')->with('success_message', $message);
         }
-
-
         // Get all sections
         $getSections = Section::get()->toArray();
         // dd($getSections);
-
-
         return view('admin.categories.add_edit_category')->with(compact('title', 'category', 'getSections', 'getCategories'));
     }
 

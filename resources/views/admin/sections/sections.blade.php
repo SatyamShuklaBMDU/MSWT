@@ -111,7 +111,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a href="{{ url('/add-edit-section/' . $section['id']) }}">
+                                                    <a href="{{ url('/add-edit-section/' . encrypt($section['id'])) }}">
                                                         <i style="font-size: 25px" class="mdi mdi-pencil-box"></i>
                                                         {{-- Icons from Skydash Admin Panel Template --}}
                                                     </a>

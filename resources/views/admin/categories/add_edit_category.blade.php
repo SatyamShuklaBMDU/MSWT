@@ -65,7 +65,7 @@
                                     </button>
                                 </div>
                             @endif
-                            <form class="forms-sample"   @if (empty($category['id'])) action="{{ url('admin/add-edit-category') }}" @else action="{{ url('admin/add-edit-category/' . $category['id']) }}" @endif   method="post" enctype="multipart/form-data"> @csrf  <!-- If the id is not passed in from the route, this measn 'Add a new Category', but if the id is passed in from the route, this means 'Edit the Category' --> <!-- Using the enctype="multipart/form-data" to allow uploading files (images) -->
+                            <form class="forms-sample"   @if (empty($category['id'])) action="{{ url('/add-edit-category') }}" @else action="{{ url('/add-edit-category/' . encrypt($category['id'])) }}" @endif   method="post" enctype="multipart/form-data"> @csrf  <!-- If the id is not passed in from the route, this measn 'Add a new Category', but if the id is passed in from the route, this means 'Edit the Category' --> <!-- Using the enctype="multipart/form-data" to allow uploading files (images) -->
                                 <div class="form-group">
                                     <label for="category_name">Category Name</label>
                                     <input type="text" class="form-control" id="category_name" placeholder="Enter Category Name" name="category_name" @if (!empty($category['category_name'])) value="{{ $category['category_name'] }}" @else value="{{ old('category_name') }}" @endif> 
@@ -86,7 +86,7 @@
                                     <label for="category_image">Category Image</label>
                                     <input type="file" class="form-control" id="category_image" name="category_image">
                                     {{-- Show the admin image if exists --}}
-                                        <a target="_blank" href="{{ url('admin/images/photos/' . Auth::guard('admin')->user()->image) }}">View Image</a> <!-- We used    target="_blank"    to open the image in another separate page --> {{-- Accessing Specific Guard Instances: https://laravel.com/docs/9.x/authentication#accessing-specific-guard-instances --}}
+                                        {{-- <a target="_blank" href="{{ url('admin/images/photos/' . Auth::guard('admin')->user()->image) }}">View Image</a> <!-- We used    target="_blank"    to open the image in another separate page --> Accessing Specific Guard Instances: https://laravel.com/docs/9.x/authentication#accessing-specific-guard-instances --}}
                                         <input type="hidden" name="current_category_image" value="{{ Auth::guard('admin')->user()->image }}"> <!-- to send the current admin image url all the time with all the requests --> {{-- Accessing Specific Guard Instances: https://laravel.com/docs/9.x/authentication#accessing-specific-guard-instances --}}
                                     {{-- Show the category image, if any (if exits) --}}
                                     @if (!empty($category['category_image']))
@@ -120,7 +120,7 @@
                                     <input type="text" class="form-control" id="meta_keywords" placeholder="Enter Meta Keywords" name="meta_keywords"   @if (!empty($category['meta_keywords'])) value="{{ $category['meta_keywords'] }}" @else value="{{ old('meta_keywords') }}" @endif > 
                                 </div>
                                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                                <button type="reset"  class="btn btn-light">Cancel</button>
+                                <a href="{{url()->previous()}}"  class="btn btn-light">Cancel</a>
                             </form>
                         </div>
                     </div>

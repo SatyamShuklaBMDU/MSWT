@@ -82,7 +82,7 @@
 
 
                             
-                            <form class="forms-sample" action="{{ url('admin/add-images/' . $product['id']) }}" method="post" enctype="multipart/form-data"> {{-- "enctype" attribute must be used becasue we're uploading files --}}
+                            <form class="forms-sample" action="{{ url('/add-images/' . encrypt($product['id'])) }}" method="post" enctype="multipart/form-data"> {{-- "enctype" attribute must be used becasue we're uploading files --}}
                                 @csrf
 
                                 <div class="form-group">
@@ -120,7 +120,7 @@
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                                <button type="reset"  class="btn btn-light">Cancel</button>
+                                <a href="{{url('/products')}}" class="btn btn-light">Cancel</a>
                             </form>
 
                             <br><br>

@@ -57,15 +57,15 @@ class BrandController extends Controller
         // Correcting issues in the Skydash Admin Panel Sidebar using Session
         Session::put('page', 'brands');
 
-
-        if ($id == '') { // if there's no $id is passed in the route/URL parameters, this means Add a new brand
+        $Did = $id ? decrypt($id) : '';
+        if ($Did == '') { // if there's no $id is passed in the route/URL parameters, this means Add a new brand
             $title = 'Add Brand';
             $brand = new Brand();
             // dd($brand);
             $message = 'Brand added successfully!';
         } else { // if the $id is passed in the route/URL parameters, this means Edit the Brand
             $title = 'Edit Brand';
-            $brand = Brand::find($id);
+            $brand = Brand::find($Did);
             // dd($brand);
             $message = 'Brand updated successfully!';
         }
@@ -94,7 +94,7 @@ class BrandController extends Controller
             $brand->save(); // Save all data in the database
 
 
-            return redirect('admin/brands')->with('success_message', $message);
+            return redirect('/brands')->with('success_message', $message);
         }
 
 

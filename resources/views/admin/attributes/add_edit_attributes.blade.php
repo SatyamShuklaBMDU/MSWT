@@ -12,7 +12,7 @@
                         <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                             <h4 class="card-title">Attributes</h4> {{-- meaning Product attributes --}}
                         </div>
-                        <div class="col-12 col-xl-4">
+                        {{-- <div class="col-12 col-xl-4">
                             <div class="justify-content-end d-flex">
                                 <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
                                     <button class="btn btn-sm btn-light bg-white dropdown-toggle" type="button" id="dropdownMenuDate2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -26,7 +26,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -83,7 +83,7 @@
 
 
                             
-                            <form class="forms-sample" action="{{ url('admin/add-edit-attributes/' . $product['id']) }}" method="post">
+                            <form class="forms-sample" action="{{ url('/add-edit-attributes/' . encrypt($product['id'])) }}" method="post">
                                 @csrf
 
                                 <div class="form-group">
@@ -127,14 +127,14 @@
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                                <button type="reset"  class="btn btn-light">Cancel</button>
+                                <a href="{{url('/products')}}" class="btn btn-light">Cancel</a>
                             </form>
 
                             <br><br>
                             
                             <h4 class="card-title">Product Attributes</h4>
 
-                            <form method="post" action="{{ url('admin/edit-attributes/' . $product['id']) }}">
+                            <form method="post" action="{{ url('/edit-attributes/' . encrypt($product['id'])) }}">
                                 @csrf
 
                                 {{-- DataTable --}}

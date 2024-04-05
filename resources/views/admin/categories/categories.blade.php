@@ -64,7 +64,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a href="{{ url('admin/add-edit-category/' . $category['id']) }}">
+                                                    <a href="{{ url('/add-edit-category/' . encrypt($category['id'])) }}">
                                                         <i style="font-size: 25px" class="mdi mdi-pencil-box"></i> {{-- Icons from Skydash Admin Panel Template --}}
                                                     </a>
 

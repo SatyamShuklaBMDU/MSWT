@@ -38,6 +38,7 @@ class SectionController extends Controller
         }
     }
     public function deleteSection($id) { 
+
         Section::where('id', $id)->delete();
         $message = 'Section has been deleted successfully!';
         return redirect()->back()->with('success_message', $message);
@@ -45,15 +46,16 @@ class SectionController extends Controller
 
     public function addEditSection(Request $request, $id = null) { // If the $id is not passed, this means Add a Section, if not, this means Edit the Section    
         // Correcting issues in the Skydash Admin Panel Sidebar using Session
+        $Did = $id ? decrypt($id) : '';
         Session::put('page', 'sections');
-        if ($id == '') { // if there's no $id is passed in the route/URL parameters, this means Add a new section
+        if ($Did == '') { // if there's no $id is passed in the route/URL parameters, this means Add a new section
             $title = 'Add Section';
             $section = new Section();
             // dd($section);
             $message = 'Section added successfully!';
         } else { // if the $id is passed in the route/URL parameters, this means Edit the Section
             $title = 'Edit Section';
-            $section = Section::find($id);
+            $section = Section::find($Did);
             // dd($section);
             $message = 'Section updated successfully!';
         }

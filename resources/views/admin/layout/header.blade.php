@@ -34,10 +34,10 @@
 
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                    <a href="{{ url('/update-admin-details') }}" class="dropdown-item">
+                    {{-- <a href="{{ url('/update-admin-details') }}" class="dropdown-item">
                     <i class="ti-settings text-primary"></i>
                     Settings
-                    </a>
+                    </a> --}}
                     <a href="{{ url('/logout') }}" class="dropdown-item">
                     <i class="ti-power-off text-primary"></i>
                     Logout

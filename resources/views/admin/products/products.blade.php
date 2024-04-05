@@ -13,7 +13,7 @@
 
 
                             
-                            <a href="{{ url('admin/add-edit-product') }}" style="max-width: 150px; float: right; display: inline-block" class="btn btn-block btn-primary">Add Product</a>
+                            <a href="{{ url('/add-edit-product') }}" style="max-width: 150px; float: right; display: inline-block" class="btn btn-block btn-primary">Add Product</a>
 
                             {{-- Displaying The Validation Errors: https://laravel.com/docs/9.x/validation#quick-displaying-the-validation-errors AND https://laravel.com/docs/9.x/blade#validation-errors --}}
                             {{-- Determining If An Item Exists In The Session (using has() method): https://laravel.com/docs/9.x/session#determining-if-an-item-exists-in-the-session --}}
@@ -63,7 +63,7 @@
                                                 <td>{{ $product['section']['name'] }}</td> {{-- Through the relationship --}}
                                                 <td>
                                                     @if ($product['admin_type'] == 'vendor')
-                                                        <a target="_blank" href="{{ url('admin/view-vendor-details/' . $product['admin_id']) }}">{{ ucfirst($product['admin_type']) }}</a>
+                                                        <a target="_blank" href="{{ url('/view-vendor-details/' . $product['admin_id']) }}">{{ ucfirst($product['admin_type']) }}</a>
                                                     @else
                                                         {{ ucfirst($product['admin_type']) }}
                                                     @endif
@@ -80,13 +80,13 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a title="Edit Product" href="{{ url('admin/add-edit-product/' . $product['id']) }}">
+                                                    <a title="Edit Product" href="{{ url('/add-edit-product/' . encrypt($product['id'])) }}">
                                                         <i style="font-size: 25px" class="mdi mdi-pencil-box"></i> {{-- Icons from Skydash Admin Panel Template --}}
                                                     </a>
-                                                    <a title="Add Attributes" href="{{ url('admin/add-edit-attributes/' . $product['id']) }}">
+                                                    <a title="Add Attributes" href="{{ url('/add-edit-attributes/' . encrypt($product['id'])) }}">
                                                         <i style="font-size: 25px" class="mdi mdi-plus-box"></i> {{-- Icons from Skydash Admin Panel Template --}}
                                                     </a>
-                                                    <a title="Add Multiple Images" href="{{ url('admin/add-images/' . $product['id']) }}">
+                                                    <a title="Add Multiple Images" href="{{ url('/add-images/' . encrypt($product['id'])) }}">
                                                         <i style="font-size: 25px" class="mdi mdi-library-plus"></i> {{-- Icons from Skydash Admin Panel Template --}}
                                                     </a>
 

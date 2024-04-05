@@ -157,8 +157,28 @@ $(document).ready(function () {
             success: function (resp) {
                 if (resp.status == 0) { // in case of success, reverse the status (active/inactive) and show the right icon in the frontend    // Or the same    if (resp['status'] == 0) {
                     $('#category-' + category_id).html('<i style="font-size: 25px" class="mdi mdi-bookmark-outline" status="Inactive"></i>');
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Status change successfully",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        customClass: {
+                            popup: 'small-modal'
+                        }
+                    });
                 } else if (resp.status == 1) {
                     $('#category-' + category_id).html('<i style="font-size: 25px" class="mdi mdi-bookmark-check" status="Active"></i>');
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Status change successfully",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        customClass: {
+                            popup: 'small-modal'
+                        }
+                    });
                 }
             },
             error: function () {
@@ -181,8 +201,28 @@ $(document).ready(function () {
             success: function (resp) {
                 if (resp.status == 0) { // in case of success, reverse the status (active/inactive) and show the right icon in the frontend    // Or the same    if (resp['status'] == 0) {
                     $('#brand-' + brand_id).html('<i style="font-size: 25px" class="mdi mdi-bookmark-outline" status="Inactive"></i>');
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Status change successfully",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        customClass: {
+                            popup: 'small-modal'
+                        }
+                    });
                 } else if (resp.status == 1) {
                     $('#brand-' + brand_id).html('<i style="font-size: 25px" class="mdi mdi-bookmark-check" status="Active"></i>');
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Status change successfully",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        customClass: {
+                            popup: 'small-modal'
+                        }
+                    }); 
                 }
             },
             error: function () {
@@ -205,8 +245,28 @@ $(document).ready(function () {
             success: function (resp) {
                 if (resp.status == 0) { // in case of success, reverse the status (active/inactive) and show the right icon in the frontend    // Or the same    if (resp['status'] == 0) {
                     $('#product-' + product_id).html('<i style="font-size: 25px" class="mdi mdi-bookmark-outline" status="Inactive"></i>');
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Status change successfully",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        customClass: {
+                            popup: 'small-modal'
+                        }
+                    }); 
                 } else if (resp.status == 1) {
                     $('#product-' + product_id).html('<i style="font-size: 25px" class="mdi mdi-bookmark-check" status="Active"></i>');
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Status change successfully",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        customClass: {
+                            popup: 'small-modal'
+                        }
+                    }); 
                 }
             },
             error: function () {
@@ -229,8 +289,28 @@ $(document).ready(function () {
             success: function (resp) {
                 if (resp.status == 0) { // in case of success, reverse the status (active/inactive) and show the right icon in the frontend    // Or the same    if (resp['status'] == 0) {
                     $('#attribute-' + attribute_id).html('<i style="font-size: 25px" class="mdi mdi-bookmark-outline" status="Inactive"></i>');
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Status change successfully",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        customClass: {
+                            popup: 'small-modal'
+                        }
+                    }); 
                 } else if (resp.status == 1) {
                     $('#attribute-' + attribute_id).html('<i style="font-size: 25px" class="mdi mdi-bookmark-check" status="Active"></i>');
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Status change successfully",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        customClass: {
+                            popup: 'small-modal'
+                        }
+                    }); 
                 }
             },
             error: function () {
@@ -253,8 +333,28 @@ $(document).ready(function () {
             success: function (resp) {
                 if (resp.status == 0) { // in case of success, reverse the status (active/inactive) and show the right icon in the frontend    // Or the same    if (resp['status'] == 0) {
                     $('#image-' + image_id).html('<i style="font-size: 25px" class="mdi mdi-bookmark-outline" status="Inactive"></i>');
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Status change successfully",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        customClass: {
+                            popup: 'small-modal'
+                        }
+                    }); 
                 } else if (resp.status == 1) {
                     $('#image-' + image_id).html('<i style="font-size: 25px" class="mdi mdi-bookmark-check" status="Active"></i>');
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Status change successfully",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        customClass: {
+                            popup: 'small-modal'
+                        }
+                    }); 
                 }
             },
             error: function () {

@@ -83,7 +83,7 @@
 
 
                             
-                            <form class="forms-sample"   @if (empty($brand['id'])) action="{{ url('admin/add-edit-brand') }}" @else action="{{ url('admin/add-edit-brand/' . $brand['id']) }}" @endif   method="post" enctype="multipart/form-data"> <!-- If the id is not passed in from the route, this measn 'Add a new Brand', but if the id is passed in from the route, this means 'Edit the Brand' --> <!-- Using the enctype="multipart/form-data" to allow uploading files (images) -->
+                            <form class="forms-sample"   @if (empty($brand['id'])) action="{{ url('/add-edit-brand') }}" @else action="{{ url('/add-edit-brand/' . encrypt($brand['id'])) }}" @endif   method="post" enctype="multipart/form-data"> <!-- If the id is not passed in from the route, this measn 'Add a new Brand', but if the id is passed in from the route, this means 'Edit the Brand' --> <!-- Using the enctype="multipart/form-data" to allow uploading files (images) -->
                                 @csrf {{-- Preventing CSRF Requests: https://laravel.com/docs/9.x/csrf#preventing-csrf-requests --}}
 
                                 <div class="form-group">
@@ -91,7 +91,7 @@
                                     <input type="text" class="form-control" id="brand_name" placeholder="Enter Brand Name" name="brand_name" @if (!empty($brand['name'])) value="{{ $brand['name'] }}" @else value="{{ old('brand_name') }}" @endif> 
                                 </div>
                                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                                <button type="reset"  class="btn btn-light">Cancel</button>
+                                <a href="{{url()->previous()}}" class="btn btn-light">Cancel</a>
                             </form>
                         </div>
                     </div>
