@@ -28,7 +28,7 @@ class FilterController extends Controller
     }
 
     public function updateFilterStatus(Request $request) { // Update Filter Status using AJAX in filters.blade.php    
-        if ($request->ajax()) { // if the request is coming via an AJAX call
+        if ($request->ajax()) { 
             $data = $request->all(); // Getting the name/value pairs array that are sent from the AJAX request (AJAX call)
             // dd($data);
 
@@ -122,7 +122,7 @@ class FilterController extends Controller
             \Illuminate\Support\Facades\DB::statement('ALTER TABLE `products` ADD ' . $data['filter_column'] . ' VARCHAR(255) AFTER `description`'); // Running A General Statement: https://laravel.com/docs/9.x/database#running-a-general-statement
 
 
-            return redirect('admin/filters')->with('success_message', $message); // $message was defined in the first if-else statement (in case Add or Update cases)
+            return redirect('filters')->with('success_message', $message); // $message was defined in the first if-else statement (in case Add or Update cases)
         }
 
 
@@ -166,7 +166,7 @@ class FilterController extends Controller
             $filter->save(); // save (persist) inserted data (whether Add or Update a Filter Value) in `products_filters_values` database table
 
 
-            return redirect('admin/filters-values')->with('success_message', $message); // $message was defined in the first if-else statement (in case Add or Update cases)
+            return redirect('filters-values')->with('success_message', $message); // $message was defined in the first if-else statement (in case Add or Update cases)
         }
 
 

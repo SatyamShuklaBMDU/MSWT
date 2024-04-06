@@ -14,9 +14,6 @@
                         <div class="col-12 col-xl-4">
                             <div class="justify-content-end d-flex">
                                 <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                                    <button class="btn btn-sm btn-light bg-white dropdown-toggle" type="button" id="dropdownMenuDate2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    <i class="mdi mdi-calendar"></i> Today (10 Jan 2021)
-                                    </button>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
                                         <a class="dropdown-item" href="#">January - March</a>
                                         <a class="dropdown-item" href="#">March - June</a>
@@ -80,7 +77,7 @@
 
 
                             
-                            <form class="forms-sample"   @if (empty($coupon['id'])) action="{{ url('admin/add-edit-coupon') }}" @else action="{{ url('admin/add-edit-coupon/' . $coupon['id']) }}" @endif   method="post" enctype="multipart/form-data">  <!-- If the id is not passed in from the route, this measn 'Add a new Coupon', but if the id is passed in from the route, this means 'Edit the Coupon' --> <!-- Using the enctype="multipart/form-data" to allow uploading files (images) -->
+                            <form class="forms-sample"   @if (empty($coupon['id'])) action="{{ url('/add-edit-coupon') }}" @else action="{{ url('/add-edit-coupon/' . encrypt($coupon['id']) ) }}" @endif   method="post" enctype="multipart/form-data">  <!-- If the id is not passed in from the route, this measn 'Add a new Coupon', but if the id is passed in from the route, this means 'Edit the Coupon' --> <!-- Using the enctype="multipart/form-data" to allow uploading files (images) -->
                                 @csrf
 
                                 @if (empty($coupon['coupon_code'])) {{-- In case of 'Add a new Coupon' --}}

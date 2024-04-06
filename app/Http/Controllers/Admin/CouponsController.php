@@ -77,7 +77,7 @@ class CouponsController extends Controller
     public function addEditCoupon(Request $request, $id = null) { // the slug (Route Parameter) {id?} is an Optional Parameter, so if it's passed, this means 'Edit/Update the Coupon', and if not passed, this means' Add a Coupon'    // GET request to render the add_edit_coupon.blade.php view (whether Add or Edit depending on passing or not passing the Optional Parameter {id?}), and POST request to submit the <form> in that same page    // {id?} Optional Parameters: https://laravel.com/docs/9.x/routing#parameters-optional-parameters    
         // Correcting issues in the Skydash Admin Panel Sidebar using Session
         Session::put('page', 'coupons');
-
+        $id = $id ? decrypt($id) : '';
 
         if ($id == '') { // if there's no $id is passed in the route/URL parameters (Optional Parameters {id?}), this means 'Add a new Coupon'
             // Add a new Coupon
@@ -191,7 +191,7 @@ class CouponsController extends Controller
             $coupon->save();
 
 
-            return redirect('admin/coupons')->with('success_message', $message);
+            return redirect('coupons')->with('success_message', $message);
         }
 
 
