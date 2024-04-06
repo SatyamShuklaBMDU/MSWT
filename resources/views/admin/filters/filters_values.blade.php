@@ -13,8 +13,8 @@
 
 
                             
-                            <a href="{{ url('admin/filters') }}"               style="max-width: 163px; float: right; display: inline-block" class="btn btn-block btn-primary">View Filters</a>
-                            <a href="{{ url('admin/add-edit-filter-value') }}" style="max-width: 150px; float: left;  display: inline-block" class="btn btn-block btn-primary">Add Filter Value</a>
+                            <a href="{{ url('filters') }}"style="max-width: 163px; float: right; display: inline-block" class="btn btn-block btn-primary">View Filters</a>
+                            <a href="{{ url('add-edit-filter-value') }}" style="max-width: 150px; float: left;  display: inline-block" class="btn btn-block btn-primary">Add Filter Value</a>
 
                             {{-- Displaying The Validation Errors: https://laravel.com/docs/9.x/validation#quick-displaying-the-validation-errors AND https://laravel.com/docs/9.x/blade#validation-errors --}}
                             {{-- Determining If An Item Exists In The Session (using has() method): https://laravel.com/docs/9.x/session#determining-if-an-item-exists-in-the-session --}}

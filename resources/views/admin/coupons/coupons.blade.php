@@ -8,12 +8,8 @@
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Coupons</h4>
-                            
-
-
-                            
-                            <a href="{{ url('admin/add-edit-coupon') }}" style="max-width: 150px; float: right; display: inline-block" class="btn btn-block btn-primary">Add Coupon</a>
+                            <h4 class="card-title">Coupons</h4>                            
+                            <a href="{{ url('add-edit-coupon') }}" style="max-width: 150px; float: right; display: inline-block" class="btn btn-block btn-primary">Add Coupon</a>
 
                             {{-- Displaying The Validation Errors: https://laravel.com/docs/9.x/validation#quick-displaying-the-validation-errors AND https://laravel.com/docs/9.x/blade#validation-errors --}}
                             {{-- Determining If An Item Exists In The Session (using has() method): https://laravel.com/docs/9.x/session#determining-if-an-item-exists-in-the-session --}}
@@ -30,7 +26,7 @@
 
                             <div class="table-responsive pt-3">
                                 {{-- DataTable --}}
-                                <table id="coupons" class="table table-bordered"> {{-- using the id here for the DataTable --}}
+                                <table id="coupons" class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
@@ -69,7 +65,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a href="{{ url('admin/add-edit-coupon/' . $coupon['id']) }}">
+                                                    <a href="{{ url('/add-edit-coupon/' . encrypt( $coupon['id'])) }}">
                                                         <i style="font-size: 25px" class="mdi mdi-pencil-box"></i> {{-- Icons from Skydash Admin Panel Template --}}
                                                     </a>
 
