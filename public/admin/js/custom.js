@@ -465,8 +465,28 @@ $(document).ready(function () {
             success: function (resp) {
                 if (resp.status == 0) { // in case of success, reverse the status (active/inactive) and show the right icon in the frontend    // Or the same    if (resp['status'] == 0) {
                     $('#filter-' + filter_id).html('<i style="font-size: 25px" class="mdi mdi-bookmark-outline" status="Inactive"></i>');
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Status change successfully",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        customClass: {
+                            popup: 'small-modal'
+                        }
+                    }); 
                 } else if (resp.status == 1) {
                     $('#filter-' + filter_id).html('<i style="font-size: 25px" class="mdi mdi-bookmark-check" status="Active"></i>');
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Status change successfully",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        customClass: {
+                            popup: 'small-modal'
+                        }
+                    });
                 }
             },
             error: function () {

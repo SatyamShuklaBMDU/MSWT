@@ -10,21 +10,6 @@
                         <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                             <h4 class="card-title">Filters</h4>
                         </div>
-                        <div class="col-12 col-xl-4">
-                            {{-- <div class="justify-content-end d-flex">
-                                <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                                    <button class="btn btn-sm btn-light bg-white dropdown-toggle" type="button" id="dropdownMenuDate2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    <i class="mdi mdi-calendar"></i> Today (10 Jan 2021)
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
-                                        <a class="dropdown-item" href="#">January - March</a>
-                                        <a class="dropdown-item" href="#">March - June</a>
-                                        <a class="dropdown-item" href="#">June - August</a>
-                                        <a class="dropdown-item" href="#">August - November</a>
-                                    </div>
-                                </div>
-                            </div> --}}
-                        </div>
                     </div>
                 </div>
             </div>
@@ -76,8 +61,6 @@
                                 </div>
                             @endif
 
-
-                            
                             <form class="forms-sample"   @if (empty($filter['id'])) action="{{ url('add-edit-filter') }}" @else action="{{ url('add-edit-filter/' . $filter['id']) }}" @endif   method="post" enctype="multipart/form-data">  <!-- If the id is not passed in from the route, this measn 'Add a new Filter', but if the id is passed in from the route, this means 'Edit the Filter' --> <!-- Using the enctype="multipart/form-data" to allow uploading files (images) -->
                                 @csrf
 
@@ -108,7 +91,7 @@
                                     <input type="text" class="form-control" id="filter_column" placeholder="Enter Filter Column" name="filter_column"  @if (!empty($filter['filter_column'])) value="{{ $filter['filter_column'] }}" @else value="{{ old('filter_column') }}" @endif>  {{-- Repopulating Forms (using old() method): https://laravel.com/docs/9.x/validation#repopulating-forms --}}
                                 </div>
                                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                                <button type="reset"  class="btn btn-light">Cancel</button>
+                                <a href="{{url('/filters')}}"  class="btn btn-light">Cancel</a>
                             </form>
                         </div>
                     </div>

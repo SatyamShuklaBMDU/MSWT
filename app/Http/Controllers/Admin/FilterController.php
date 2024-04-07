@@ -93,17 +93,20 @@ class FilterController extends Controller
             $title   = 'Add Filter Columns';
             $filter  = new ProductsFilter;
             $message = 'Filter added successfully!';
-        } else { // if the $id is passed in the route/URL parameter, this means Edit (Update) the Filter
+        } else {
             $title   = 'Edit Filter Columns';
             $filter  = ProductsFilter::find($id);
             $message = 'Filter updated successfully!';
         }
-
-
-        // SECONDLY, IF THE REQUEST METHOS IS 'POST', THEN SUBMIT THE HTML <form> IN add_edit_filter.blade.php PAGE (WHETHER ADD OR UPDATE A BANNER):
-        if ($request->isMethod('post')) { // WHETHER Add or Update <form> submission!!
+        if ($request->isMethod('post')) {
             $data = $request->all();
             // dd($data);
+            $rules = [
+                'cat_ids'        => 'required',
+                'filter_name'    => 'required',
+                'filter_column'  => 'required'
+            ];
+            $this->validate($request, $rules);
 
             $cat_ids = implode(',', $request['cat_ids']); // implode() converts array to string (to be able to store data as a string in `cat_ids` column of the `products_filters` database table)    // Note:    $request['cat_ids']    comes form the <select>s box "value" HTML attributes (Select Category) (using the "multiple" HTML attribute in the <select>) in add_edit_filter.blade.php
 
@@ -119,7 +122,7 @@ class FilterController extends Controller
 
 
             // Secondly: Save inserted `filter_column` as a new column in `products` database table after `description` column
-            \Illuminate\Support\Facades\DB::statement('ALTER TABLE `products` ADD ' . $data['filter_column'] . ' VARCHAR(255) AFTER `description`'); // Running A General Statement: https://laravel.com/docs/9.x/database#running-a-general-statement
+            // \Illuminate\Support\Facades\DB::statement('ALTER TABLE `products` ADD ' . $data['filter_column'] . ' VARCHAR(255) AFTER `description`');
 
 
             return redirect('filters')->with('success_message', $message); // $message was defined in the first if-else statement (in case Add or Update cases)
@@ -156,6 +159,12 @@ class FilterController extends Controller
         if ($request->isMethod('post')) { // WHETHER Add or Update <form> submission!!
             $data = $request->all();
             // dd($data);
+            $rules = [
+                'filter_id'       => 'required',
+                'filter_value'    => 'required'
+            ];
+
+            $this->validate($request, $rules);
 
 
             // Save inserted data (whether Add or Update a Filter Value) in `products_filters_values` database table
@@ -186,8 +195,7 @@ class FilterController extends Controller
 
             $category_id = $data['category_id']; // ['category_id'] comes from the AJAX call in admin/js/custom.js page from the 'data' object inside $.ajax() method
 
-
-            return response()->json([ // JSON Responses: https://laravel.com/docs/9.x/responses#json-responses
+            return response()->json([ 
                 'view' => (String) \Illuminate\Support\Facades\View::make('admin.filters.category_filters')->with(compact('category_id')) // View Responses: https://laravel.com/docs/9.x/responses#view-responses    // Creating & Rendering Views: https://laravel.com/docs/9.x/views#creating-and-rendering-views    // Passing Data To Views: https://laravel.com/docs/9.x/views#passing-data-to-views
             ]);
         }
