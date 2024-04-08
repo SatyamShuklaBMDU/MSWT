@@ -63,7 +63,6 @@
                                                     <a href="{{ url('/add-edit-banner/' .encrypt( $banner['id']) ) }}">
                                                         <i style="font-size: 25px" class="mdi mdi-pencil-box"></i> {{-- Icons from Skydash Admin Panel Template --}}
                                                     </a>
-
                                                     {{-- Confirm Deletion JS alert and Sweet Alert --}}
                                                     {{-- <a title="Banner" class="confirmDelete" href="{{ url('admin/delete-banner/' . $banner['id']) }}"> --}}
                                                         {{-- <i style="font-size: 25px" class="mdi mdi-file-excel-box"></i> --}} {{-- Icons from Skydash Admin Panel Template --}}
