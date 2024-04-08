@@ -64,13 +64,13 @@ class BannersController extends Controller
         return redirect()->back()->with('success_message', $message);
     }
 
-    public function addEditBanner(Request $request, $id = null) { // If the $id is not passed, this means 'Add a Banner', but if it's passed, this means 'Edit the Banner'    
+    public function addEditBanner(Request $request, $id = null) {
+        $id = $id ? decrypt($id) : '';
+        // If the $id is not pTHEN RENDER THE add_edit_banner.blade.php PAGE:
+        if ($id == '') { // if there's no $id passedassed, this means 'Add a Banner', but if it's passed, this means 'Edit the Banner'    
         // Correcting issues in the Skydash Admin Panel Sidebar using Session
         Session::put('page', 'banners');
-
-
-        // FIRSTLY, IF THE REQUEST METHOS IS 'GET', THEN RENDER THE add_edit_banner.blade.php PAGE:
-        if ($id == '') { // if there's no $id passed in the route/URL parameters, this means 'Add a new Banner'
+        // FIRSTLY, IF THE REQUEST METHOS IS 'GET',  in the route/URL parameters, this means 'Add a new Banner'
             $banner = new Banner;
             $title = 'Add Banner Image';
             $message = 'Banner added successfully!';
@@ -85,6 +85,19 @@ class BannersController extends Controller
         if ($request->isMethod('post')) { // WHETHER Add or Update <form> submission!!
             $data = $request->all();
             // dd($data);
+            // Laravel's Validation    // Customizing Laravel's Validation Error Messages: https://laravel.com/docs/9.x/validation#customizing-the-error-messages    // Customizing Validation Rules: https://laravel.com/docs/9.x/validation#custom-validation-rules    
+            $rules = [
+                'type'    => 'required',
+                'link'        => 'required',
+                'title' => 'required',
+                'alt'   => 'required'
+                // 'amount_type'   => 'required',
+                // 'amount'        => 'required|numeric',
+                // 'expiry_date'   => 'required'
+            ];
+
+
+            $this->validate($request, $rules);
 
             $banner->type   = $data['type'];
             $banner->link   = $data['link'];
@@ -125,7 +138,7 @@ class BannersController extends Controller
 
             $banner->save(); // save inserted data (whether add or update a Brand)
 
-            return redirect('admin/banners')->with('success_message', $message); // $message was defined in the first if-else statement (in case Add or Update cases)
+            return redirect('/banners')->with('success_message', $message); // $message was defined in the first if-else statement (in case Add or Update cases)
         }
 
 

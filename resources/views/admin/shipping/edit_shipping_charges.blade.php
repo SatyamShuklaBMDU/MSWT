@@ -11,21 +11,6 @@
                         <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                             <h3 class="font-weight-bold">Edit Shipping Charges</h3>
                         </div>
-                        <div class="col-12 col-xl-4">
-                            <div class="justify-content-end d-flex">
-                                <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                                    <button class="btn btn-sm btn-light bg-white dropdown-toggle" type="button" id="dropdownMenuDate2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    <i class="mdi mdi-calendar"></i> Today (10 Jan 2021)
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
-                                        <a class="dropdown-item" href="#">January - March</a>
-                                        <a class="dropdown-item" href="#">March - June</a>
-                                        <a class="dropdown-item" href="#">June - August</a>
-                                        <a class="dropdown-item" href="#">August - November</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -47,8 +32,6 @@
                                 </div>
                             @endif
 
-
-
                             {{-- Displaying Laravel Validation Errors: https://laravel.com/docs/9.x/validation#quick-displaying-the-validation-errors --}}    
                             @if ($errors->any())
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -63,9 +46,6 @@
                                 </button>
                             </div>
                             @endif
-
-
-
                             {{-- Displaying The Validation Errors: https://laravel.com/docs/9.x/validation#quick-displaying-the-validation-errors AND https://laravel.com/docs/9.x/blade#validation-errors --}}
                             {{-- Determining If An Item Exists In The Session (using has() method): https://laravel.com/docs/9.x/session#determining-if-an-item-exists-in-the-session --}}
                             {{-- Our Bootstrap success message in case of updating admin password is successful: --}}
@@ -80,7 +60,7 @@
                 
 
                             
-                            <form class="forms-sample" action="{{ url('admin/edit-shipping-charges/' . $shippingDetails['id']) }}" method="post"> <!-- If the id is not passed in from the route, this measn 'Add a new Shipping Charge', but if the id is passed in from the route, this means 'Edit the Shipping Charge' --> <!-- Using the enctype="multipart/form-data" to allow uploading files (images) -->
+                            <form class="forms-sample" action="{{ url('/edit-shipping-charges/' . encrypt( $shippingDetails['id'])) }}" method="post"> <!-- If the id is not passed in from the route, this measn 'Add a new Shipping Charge', but if the id is passed in from the route, this means 'Edit the Shipping Charge' --> <!-- Using the enctype="multipart/form-data" to allow uploading files (images) -->
                                 @csrf {{-- Preventing CSRF Requests: https://laravel.com/docs/9.x/csrf#preventing-csrf-requests --}}
 
                                 <div class="form-group">

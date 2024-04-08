@@ -11,18 +11,6 @@
                         <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                             <h4 class="card-title">Coupons</h4>
                         </div>
-                        <div class="col-12 col-xl-4">
-                            <div class="justify-content-end d-flex">
-                                <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
-                                        <a class="dropdown-item" href="#">January - March</a>
-                                        <a class="dropdown-item" href="#">March - June</a>
-                                        <a class="dropdown-item" href="#">June - August</a>
-                                        <a class="dropdown-item" href="#">August - November</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -120,16 +108,14 @@
                                 
                                 <div class="form-group">
                                     <label for="categories">Select Category:</label>
-                                    <select name="categories[]" class="form-control text-dark" multiple> {{-- "multiple" HTML attribute: https://www.w3schools.com/tags/att_multiple.asp --}} {{-- We used the Square Brackets [] in name="categories[]" is an array because we used the "multiple" HTML attribute to be able to choose multiple categories (more than one category) at the same time --}}
+                                    <select name="categories[]" class="form-control text-dark " multiple> {{-- "multiple" HTML attribute: https://www.w3schools.com/tags/att_multiple.asp --}} {{-- We used the Square Brackets [] in name="categories[]" is an array because we used the "multiple" HTML attribute to be able to choose multiple categories (more than one category) at the same time --}}
                                         @foreach ($categories as $section) {{-- $categories are ALL the `sections` with their related 'parent' categories (if any (if exist)) and their subcategories or `child` categories (if any (if exist)) --}} {{-- Check CouponsController.php --}}
                                             <optgroup label="{{ $section['name'] }}"> {{-- sections --}}
                                                 @foreach ($section['categories'] as $category) {{-- parent categories --}} {{-- Check CouponsController.php --}}
-
                                                     <option value="{{ $category['id'] }}"  @if (in_array($category['id'], $selCats)) selected @endif>&nbsp;&nbsp;&nbsp;--&nbsp;{{ $category['category_name'] }}</option> {{-- parent categories --}}
                                                     @foreach ($category['sub_categories'] as $subcategory) {{-- subcategories or child categories --}} {{-- Check CouponsController.php --}}
                                                         <option value="{{ $subcategory['id'] }}" @if (in_array($subcategory['id'], $selCats)) selected @endif>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;{{ $subcategory['category_name'] }}</option> {{-- subcategories or child categories --}}
                                                     @endforeach
-
                                                 @endforeach
                                             </optgroup>
                                         @endforeach
@@ -156,12 +142,12 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="expiry_date">Expiry Date:</label> {{-- Coupon Expiry Date --}}
-                                    <input type="date" class="form-control" id="expiry_date" placeholder="Enter Expiry Date" name="expiry_date"  @if (isset($coupon['expiry_date'])) value="{{ $coupon['expiry_date'] }}" @else value="{{ old('expiry_date') }}" @endif>  {{-- Repopulating Forms (using old() method): https://laravel.com/docs/9.x/validation#repopulating-forms --}}
+                                    <input type="date" class="form-control" min="{{ date("Y-m-d"); }}" id="expiry_date" placeholder="Enter Expiry Date" name="expiry_date"  @if (isset($coupon['expiry_date'])) value="{{ $coupon['expiry_date'] }}" @else value="{{ old('expiry_date') }}" @endif>  {{-- Repopulating Forms (using old() method): https://laravel.com/docs/9.x/validation#repopulating-forms --}}
                                 </div>
 
 
                                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                                <button type="reset"  class="btn btn-light">Cancel</button>
+                                <a href="{{url('/coupons')}}" class="btn btn-light">Cancel</a>
                             </form>
                         </div>
                     </div>

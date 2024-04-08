@@ -65,7 +65,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a href="{{ url('admin/edit-shipping-charges/' . $shipping['id']) }}">
+                                                    <a href="{{ url('/edit-shipping-charges/' . encrypt($shipping['id']) )}}">
                                                         <i style="font-size: 25px" class="mdi mdi-pencil-box"></i> {{-- Icons from Skydash Admin Panel Template --}}
                                                     </a>
 

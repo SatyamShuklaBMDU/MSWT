@@ -52,6 +52,7 @@ class ShippingController extends Controller
     public function editShippingCharges($id, Request $request) { // Route Parameters: Required Parameters: https://laravel.com/docs/9.x/routing#required-parameters
         // Highlight the 'Shipping Charges' module in the Sidebar on the left in the Admin Panel. Correcting issues in the Skydash Admin Panel Sidebar using Session
         Session::put('page', 'shipping');
+        $id = $id ? decrypt($id) : '';
 
         if ($request->isMethod('post')) { // if the HTML Form in edit_shipping_charges.blade.php is submitted (WHETHER Add or Update!)
             $data = $request->all();

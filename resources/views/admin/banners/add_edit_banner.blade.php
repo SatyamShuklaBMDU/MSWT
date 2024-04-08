@@ -10,7 +10,6 @@
                         <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                             <h4 class="card-title">Home Page Banners</h4>
                         </div>
-                        
                     </div>
                 </div>
             </div>
@@ -31,9 +30,6 @@
                                     </button>
                                 </div>
                             @endif
-
-
-
                             {{-- Displaying Laravel Validation Errors: https://laravel.com/docs/9.x/validation#quick-displaying-the-validation-errors --}}    
                             @if ($errors->any())
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -47,9 +43,6 @@
                                     </button>
                                 </div>
                             @endif
-
-
-
                             {{-- Displaying The Validation Errors: https://laravel.com/docs/9.x/validation#quick-displaying-the-validation-errors AND https://laravel.com/docs/9.x/blade#validation-errors --}}
                             {{-- Determining If An Item Exists In The Session (using has() method): https://laravel.com/docs/9.x/session#determining-if-an-item-exists-in-the-session --}}
                             {{-- Our Bootstrap success message in case of updating admin password is successful: --}}
@@ -61,10 +54,7 @@
                                     </button>
                                 </div>
                             @endif
-                
-
-                            
-                            <form class="forms-sample"   @if (empty($banner['id'])) action="{{ url('/add-edit-banner') }}" @else action="{{ url('/add-edit-banner/' . $banner['id']) }}" @endif   method="post" enctype="multipart/form-data"> <!-- If the id is not passed in from the route, this measn 'Add a new Banner', but if the id is passed in from the route, this means 'Edit the Banner' --> <!-- Using the enctype="multipart/form-data" to allow uploading files (images) -->
+                            <form class="forms-sample"   @if (empty($banner['id'])) action="{{ url('/add-edit-banner') }}" @else action="{{ url('/add-edit-banner/' . encrypt( $banner['id']) ) }}" @endif   method="post" enctype="multipart/form-data"> <!-- If the id is not passed in from the route, this measn 'Add a new Banner', but if the id is passed in from the route, this means 'Edit the Banner' --> <!-- Using the enctype="multipart/form-data" to allow uploading files (images) -->
                                 @csrf
 
                                 <div class="form-group"> 
@@ -101,7 +91,8 @@
                                     <input type="text" class="form-control" id="alt" placeholder="Enter Banner Alternate Text" name="alt" @if (!empty($banner['alt'])) value="{{ $banner['alt'] }}" @else value="{{ old('alt') }}" @endif> 
                                 </div>
                                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                                <button type="reset"  class="btn btn-light">Cancel</button>
+                                {{-- <button type="reset"  class="btn btn-light">Cancel</button> --}}
+                                <a href="{{ url('/banners') }}" class="btn btn-light">Cancel</a>
                             </form>
                         </div>
                     </div>

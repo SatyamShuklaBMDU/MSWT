@@ -155,7 +155,6 @@ class CouponsController extends Controller
                 $users = '';
             }
 
-
             // In case of 'Automatic' Coupon Option, we generate a random coupon code string, but in case it's 'Manual', we take the inserted coupon code as is
             if ($data['coupon_option'] == 'Automatic') {
                 $coupon_code = \Illuminate\Support\Str::random(8); // Str::random(): https://laravel.com/docs/9.x/helpers#method-str-random
@@ -187,7 +186,6 @@ class CouponsController extends Controller
             $coupon->amount        = $data['amount'];
             $coupon->expiry_date   = $data['expiry_date'];
             $coupon->status        = 1;
-
             $coupon->save();
 
 
