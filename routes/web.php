@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\ComplaintContrller;
+use App\Http\Controllers\Admin\ComplaintController;
+use App\Http\Controllers\Admin\FeedbackController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -155,6 +158,9 @@ Route::prefix('')->namespace('App\Http\Controllers\Admin')->group(function() {
         Route::post('update-rating-status', 'RatingController@updateRatingStatus');
         // Delete a Rating via AJAX in admin/ratings/ratings.blade.php, check admin/js/custom.js
         Route::get('delete-rating/{id}', 'RatingController@deleteRating'); 
+        //complaint module
+        Route::get('/complaint','ComplaintController@show');
+        Route::get('/feedback','FeedbackController@show');
     });
 });
 // User download order PDF invoice (We'll use the same viewPDFInvoice() function (but with different routes/URLs!) to render the PDF invoice for 'admin'-s in the Admin Panel and for the user to download it!) (we created this route outside outside the Admin Panel routes so that the user could use it!)

@@ -113,7 +113,6 @@ class BannersController extends Controller
                 $width  = '1920';
                 $height = '450';
             }
-
             // Uploading Banner Image    // Using the Intervention package for uploading images
             if ($request->hasFile('image')) { // the HTML name attribute    name="admin_name"    in update_admin_details.blade.php
                 $image_tmp = $request->file('image'); // Retrieving Uploaded Files: https://laravel.com/docs/9.x/requests#retrieving-uploaded-files
