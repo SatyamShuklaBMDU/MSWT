@@ -193,8 +193,6 @@ class Order extends Model
             $status  = false;
             $message = 'Order has not been pushed to ShipRocket. Please contact Admin';
         }
-
-
         return [
             'status'  => $status,
             'message' => $message
