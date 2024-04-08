@@ -15,10 +15,9 @@ return new class extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
-
             $table->string('name');
             $table->string('type'); // superadmin, admin, subadmin, or vendor
-            $table->integer('vendor_id'); // only if the    $table->string('type')    is 'vendor', then 'vendor_id' is one 1, otherwise, all the other 'type'-s, `vendor_id` will be zero 0
+            $table->integer('vendor_id')->nullable(); // only if the    $table->string('type')    is 'vendor', then 'vendor_id' is one 1, otherwise, all the other 'type'-s, `vendor_id` will be zero 0
             $table->string('mobile');
             $table->string('email')->unique();
             $table->string('password');

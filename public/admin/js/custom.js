@@ -274,6 +274,46 @@ $(document).ready(function () {
             }
         });
     });
+    $(document).on('click', '.updateAdminStatus', function () { // '.updateProductStatus' is the anchor link <a> CSS class    // This is the same as    $('.updateProductStatus').on('click', function() {
+        var status = $(this).children('i').attr('status'); // Using HTML Custom Attributes
+        var admin_id = $(this).attr('admin_id'); // Using HTML Custom Attributes
+        $.ajax({
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }, // X-CSRF-TOKEN: https://laravel.com/docs/9.x/csrf#csrf-x-csrf-token    
+            type: 'post',
+            url: '/update-user-admin-status', // check the web.php for this route and check the ProductsController for the updateProductStatus() method
+            data: { status: status, admin_id: admin_id }, // we pass the status and product_id
+            success: function (resp) {
+                if (resp.status == 0) { // in case of success, reverse the status (active/inactive) and show the right icon in the frontend    // Or the same    if (resp['status'] == 0) {
+                    $('#admin-' + admin_id).html('<i style="font-size: 25px" class="mdi mdi-bookmark-outline" status="Inactive"></i>');
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Status change successfully",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        customClass: {
+                            popup: 'small-modal'
+                        }
+                    }); 
+                } else if (resp.status == 1) {
+                    $('#admin-' + admin_id).html('<i style="font-size: 25px" class="mdi mdi-bookmark-check" status="Active"></i>');
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Status change successfully",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        customClass: {
+                            popup: 'small-modal'
+                        }
+                    }); 
+                }
+            },
+            error: function () {
+                alert('Error');
+            }
+        });
+    });
 
     // Updating Attribute status (active/inactive) using AJAX in add_edit_attributes.blade.php    
     $(document).on('click', '.updateAttributeStatus', function () { // '.updateAttributeStatus' is the anchor link <a> CSS class    // This is the same as    $('.updateAttributetatus').on('click', function() {
