@@ -92,7 +92,7 @@ class APIController extends Controller
                 'email.required'    => 'Your email (field) is required',
                 'email.email'       => 'Your email (field) must be a Valid email',
                 'email.unique'      => 'Your email already exists in our database!',
-                'password.required' => 'Your password (field) is required'
+            'password.required' => 'Your password (field) is required'
             ];
             $validator = \Illuminate\Support\Facades\Validator::make($userData, $rules, $customMessages);
             if ($validator->fails()) {
@@ -344,17 +344,16 @@ class APIController extends Controller
                 'name'     => 'required|regex:/^[\pL\s\-]+$/u', // regex:pattern: https://laravel.com/docs/9.x/validation#rule-regex
                 'email'    => 'required|email|unique:users', // 'unique' validation rule in `users` datbase table    // unique:table,column: https://laravel.com/docs/9.x/validation#rule-unique
                 'password' => 'required'
+                
             ];
 
             // Customizing Laravel's default error messages for every [Field with Validation Rule] e.g. the 'required' Validation Rule for the 'name' field    // Customizing The Error Messages: https://laravel.com/docs/9.x/validation#manual-customizing-the-error-messages
-            $customMessages = [
+                $customMessages = [
                 // The SAME last Fields (inside $rules array)
                 'name.required'     => 'Your Name (field) is required',
-
                 'email.required'    => 'Your email (field) is required',
                 'email.email'       => 'Your email (field) must be a Valid email',
                 'email.unique'      => 'Your email already exists in our database!',
-
                 'password.required' => 'Your password (field) is required'
             ];
             
@@ -363,23 +362,34 @@ class APIController extends Controller
             if ($validator->fails()) {
                 return response()->json($validator->errors(), 422);        
             }
+            //if genrate refrrals code
+            $rendomnumber=rand(1000,9999);
+            $referral_id="mswt".$rendomnumber;
+            // $userData['referral_id']=$referral_id;
 
-
+            
+             
             // Generate a new Access Token for the user, and save it in the `access_token` column in `users` table (and overwrite/override/replace the old Access Token in `access_token` column if there is any!)
             $accessToken = \Illuminate\Support\Str::random(60); // Str::random(): https://laravel.com/docs/9.x/helpers#method-str-random
-
             // Register the new user i.e. Save the submitted user data (name, email and password) along with the newly generated API Access Token in `users` table
             $user = new User;
-
             $user->name     = $userData['name'];
             $user->email    = $userData['email'];
             $user->password = bcrypt($userData['password']); // Hash the password before saving it in the database table
-           
+            $user->referral_id=$referral_id;
             // $user->api_token = $apiToken;
             $user->access_token = $accessToken;
-
             $user->save();
-
+            if ($request->has('from_referral_number') && !empty($request->from_referral_number)) {
+                if ($this->isValidReferralNumber($request->from_referral_number)) {
+                    $referralController = new ReferralController();
+                    $referralUser = user::where('referral_id', $request->from_referral_number)->first();
+                    // dd($referralUser);
+                    $referralController->store($referralUser->id, $user->id);
+                } else {
+                    return response()->json(['message' => 'Invalid referral number.', 'success' => false], 200);
+                }
+            }
 
             // Send back the newly submitted user data of the successful operation to the user again! (Note: This a well-known convention of APIs to send back the successful accepted data!)    
             return response()->json([ // Note: $user is AUTOMATICALLY converted from Laravel/PHP object to JSON! But we'll manually convert it to JSON using    return response()->json()    to show the "users" JSON property key/name in the response! Try the TWO cases and check the difference in Postman in "Pretty" tab!    // JSON Responses: https://laravel.com/docs/9.x/responses#json-responses
@@ -387,7 +397,7 @@ class APIController extends Controller
                 'message' => 'User registered successfully!',
                 'token'   => $accessToken,
                 'user'    => $user
-            ], 201);  // 201 HTTP Status Code: Created    // With POST requests, 201 Created HTTP Status Code is sent with the HTTP Response        
+            ], 201);  // 201 HTTP Status Code: Created    // With POST requests, 201 Created HTTP Status Code is sent with the HTTP Response      
 
         } else { // if the user is using the wrong dedicated HTTP Request Method/Verb for their request (i.e. User has used an HTTP Request Method/Verb other than 'POST')
             $message = 'You\'re using an incorrect/invalid HTTP Request Method/Verb to access this route/endpoint in our API!';
@@ -396,6 +406,16 @@ class APIController extends Controller
                 'status'  => false,
                 'message' => $message
             ], 422); // 422 HTTP Status Code: Unprocessable Content        
+        }
+    }
+    private function isValidReferralNumber($referralNumber)
+    {
+        $referralUser = user::where('referral_id', $referralNumber)->first();
+
+        if ($referralUser) {
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -425,7 +445,6 @@ class APIController extends Controller
 
             if ($validator->fails()) {
                 return response()->json($validator->errors(), 422);       
- 
             }
 
             // Fetch/Get the submitted user record (their `users` table row) from `users` table based on the submitted `email` in order to verify the submitted `password`
@@ -505,7 +524,6 @@ class APIController extends Controller
         } else { // if the user is using the wrong dedicated HTTP Request Method/Verb for their request (i.e. User has used an HTTP Request Method/Verb other than 'POST')
 
             $message = 'You\'re using an incorrect/invalid HTTP Request Method/Verb to access this route/endpoint in our API!';
-
             return response()->json([ // JSON Responses: https://laravel.com/docs/9.x/responses#json-responses
                 'status'  => false,
                 'message' => $message
