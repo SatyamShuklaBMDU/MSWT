@@ -166,6 +166,8 @@ Route::prefix('')->namespace('App\Http\Controllers\Admin')->group(function() {
         //complaint module
         Route::get('/complaint','ComplaintController@show');
         Route::get('/feedback','FeedbackController@show');
+        Route::get('/referral','ReferralController@show');
+
     });
 });
 // User download order PDF invoice (We'll use the same viewPDFInvoice() function (but with different routes/URLs!) to render the PDF invoice for 'admin'-s in the Admin Panel and for the user to download it!) (we created this route outside outside the Admin Panel routes so that the user could use it!)
