@@ -33,7 +33,7 @@
                                 <table id="products" class="table table-bordered"> {{-- using the id here for the DataTable --}}
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th>Sr. No.</th>
                                             <th>Product Name</th>
                                             <th>Product Code</th>
                                             <th>Product Color</th>
@@ -48,7 +48,7 @@
                                     <tbody>
                                         @foreach ($products as $product)
                                             <tr>
-                                                <td>{{ $product['id'] }}</td>
+                                                <td>{{ $loop->index + 1 }}</td>
                                                 <td>{{ $product['product_name'] }}</td>
                                                 <td>{{ $product['product_code'] }}</td>
                                                 <td>{{ $product['product_color'] }}</td>

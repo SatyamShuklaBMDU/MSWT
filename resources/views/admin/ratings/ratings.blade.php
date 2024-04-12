@@ -31,7 +31,7 @@
                                 <table id="ratings" class="table table-bordered"> {{-- using the id here for the DataTable --}}
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th>Sr.No.</th>
                                             <th>Product Name</th>
                                             <th>User Email</th>
                                             <th>Review</th>
@@ -43,11 +43,11 @@
                                     <tbody>
                                         @foreach ($ratings as $rating)
                                             <tr>
-                                                <td>{{ $rating['id'] }}</td>
+                                                <td>{{ $loop->iteration }}</td>
                                                 <td>
-                                                    <a target="_blank" href="{{ url('product/' . $rating['product']['id']) }}">
+                                                    {{-- <a target="_blank" href="{{ url('product/' . $rating['product']['id']) }}"> --}}
                                                         {{ $rating['product']['product_name'] }}
-                                                    </a>
+                                                    {{-- </a> --}}
                                                 </td>
                                                 <td>{{ $rating['user']['email'] }}</td>
                                                 <td>{{ $rating['review'] }}</td>

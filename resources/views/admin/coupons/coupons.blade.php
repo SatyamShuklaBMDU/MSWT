@@ -29,7 +29,7 @@
                                 <table id="coupons" class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th>Sr. No.</th>
                                             <th>Coupon Code</th>
                                             <th>Coupon Type</th>
                                             <th>Amount</th>
@@ -41,7 +41,7 @@
                                     <tbody>
                                         @foreach ($coupons as $coupon)
                                             <tr>
-                                                <td>{{ $coupon['id'] }}</td>
+                                                <td>{{ $loop->index + 1 }}</td>
                                                 <td>{{ $coupon['coupon_code'] }}</td>
                                                 <td>{{ $coupon['coupon_type'] }}</td>
                                                 <td>

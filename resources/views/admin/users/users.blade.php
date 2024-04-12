@@ -91,7 +91,7 @@
                                     <thead>
                                         <tr>
                                             <th>Sr. No.</th>
-                                            <th>ID</th>
+                                            {{-- <th>ID</th> --}}
                                             <th>Date</th>
                                             {{-- <th>Photo</th> --}}
                                             <th>Name</th>
@@ -109,7 +109,7 @@
                                         @foreach ($users as $user)
                                             <tr>
                                                 <td>{{ $loop->index + 1 }}</td>
-                                                <td>{{ $user['id'] }}</td>
+                                                {{-- <td>{{ $user['id'] }}</td> --}}
                                                 <td>{{ \Carbon\Carbon::parse($user['created_at'])->format('d/m/Y') }}</td>
                                                 {{-- <td>
                                  <img src="{{ asset('front/images/product_images/'.$user['photo']) }}" alt="Example Image">
@@ -140,24 +140,22 @@
                                                         @endif
                                                     </select>
                                                 </td>
-                                                <td>
+                                                {{-- <td>
                                                     @if ($user['status'] == 1)
                                                         <a class="updateUserStatus" id="user-{{ $user['id'] }}"
                                                             user_id="{{ $user['id'] }}" href="javascript:void(0)">
                                                             <i style="font-size: 25px" class="mdi mdi-bookmark-check"
-                                                                status="Active"></i> {{-- Icons from Skydash Admin Panel Template --}}
+                                                                status="Active"></i> 
                                                         </a>
                                                     @endif
                                                     @if ($user['status'] == 0)
-                                                        {{-- if the admin status is inactive --}}
                                                         <a class="updateUserStatus" id="user-{{ $user['id'] }}"
                                                             user_id="{{ $user['id'] }}" href="javascript:void(0)">
-                                                            {{-- Using HTML Custom Attributes. Check admin/js/custom.js --}}
                                                             <i style="font-size: 25px" class="mdi mdi-bookmark-outline"
-                                                                status="Inactive"></i> {{-- Icons from Skydash Admin Panel Template --}}
+                                                                status="Inactive"></i>
                                                         </a>
                                                     @endif
-                                                </td>
+                                                </td> --}}
                                             </tr>
                                         @endforeach
                                     </tbody>

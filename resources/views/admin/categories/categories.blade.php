@@ -8,8 +8,8 @@
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Categories</h4>                            
-                            <a href="{{ url('/add-edit-category') }}" style="max-width: 150px; float: right; display: inline-block" class="btn btn-block btn-primary">Add Category</a>
+                            <h4 class="card-title">Sub Categories</h4>                            
+                            <a href="{{ url('/add-edit-category') }}" style="max-width: 200px; float: right; display: inline-block" class="btn btn-block btn-primary">Add SubCategory</a>
 
                             {{-- Displaying The Validation Errors: https://laravel.com/docs/9.x/validation#quick-displaying-the-validation-errors AND https://laravel.com/docs/9.x/blade#validation-errors --}}
                             {{-- Determining If An Item Exists In The Session (using has() method): https://laravel.com/docs/9.x/session#determining-if-an-item-exists-in-the-session --}}
@@ -29,7 +29,7 @@
                                 <table id="categories" class="table table-bordered"> {{-- using the id here for the DataTable --}}
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th>Sr. No.</th>
                                             <th>Category Name</th>
                                             <th>Parent Category</th> {{-- Through the relationship --}}
                                             <th>Parent Section</th> {{-- Through the relationship --}}
@@ -47,7 +47,7 @@
                                                 @php $parent_category = 'Root'; @endphp
                                             @endif
                                             <tr>
-                                                <td>{{ $category['id'] }}</td>
+                                                <td>{{ $loop->index + 1 }}</td>
                                                 <td>{{ $category['category_name'] }}</td>
                                                 <td>{{ $parent_category }}</td> {{-- Through the relationship --}}
                                                 <td>{{ $category['section']['name'] }}</td> {{-- Through the relationship --}}

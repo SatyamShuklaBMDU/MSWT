@@ -27,7 +27,7 @@
                                 <table id="filters" class="table table-bordered"> {{-- using the id here for the DataTable --}}
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th>Sr. No.</th>
                                             <th>Filter Name</th>
                                             <th>Filter Column</th>
                                             <th>Categories</th>
@@ -37,7 +37,7 @@
                                     <tbody>
                                         @foreach ($filters as $filter)
                                             <tr>
-                                                <td>{{ $filter['id'] }}</td>
+                                                <td>{{ $loop->index+1}}</td>
                                                 <td>{{ $filter['filter_name'] }}</td>
                                                 <td>{{ $filter['filter_column'] }}</td>
                                                 <td>

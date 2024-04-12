@@ -8,23 +8,8 @@
                 <div class="col-md-12 grid-margin">
                     <div class="row">
                         <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                            <h4 class="card-title">Categories</h4>
+                            <h4 class="card-title">Sub-Categories</h4>
                         </div>
-                        {{-- <div class="col-12 col-xl-4">
-                            <div class="justify-content-end d-flex">
-                                <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                                    <button class="btn btn-sm btn-light bg-white dropdown-toggle" type="button" id="dropdownMenuDate2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    <i class="mdi mdi-calendar"></i> Today (10 Jan 2021)
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
-                                        <a class="dropdown-item" href="#">January - March</a>
-                                        <a class="dropdown-item" href="#">March - June</a>
-                                        <a class="dropdown-item" href="#">June - August</a>
-                                        <a class="dropdown-item" href="#">August - November</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -67,8 +52,8 @@
                             @endif
                             <form class="forms-sample"   @if (empty($category['id'])) action="{{ url('/add-edit-category') }}" @else action="{{ url('/add-edit-category/' . encrypt($category['id'])) }}" @endif   method="post" enctype="multipart/form-data"> @csrf  <!-- If the id is not passed in from the route, this measn 'Add a new Category', but if the id is passed in from the route, this means 'Edit the Category' --> <!-- Using the enctype="multipart/form-data" to allow uploading files (images) -->
                                 <div class="form-group">
-                                    <label for="category_name">Category Name</label>
-                                    <input type="text" class="form-control" id="category_name" placeholder="Enter Category Name" name="category_name" @if (!empty($category['category_name'])) value="{{ $category['category_name'] }}" @else value="{{ old('category_name') }}" @endif> 
+                                    <label for="category_name">Sub-Category Name</label>
+                                    <input type="text" class="form-control" id="category_name" placeholder="Enter Sub-Category Name" name="category_name" @if (!empty($category['category_name'])) value="{{ $category['category_name'] }}" @else value="{{ old('category_name') }}" @endif> 
                                 </div>
                                 <div class="form-group">
                                     <label for="section_id">Select Section</label>
@@ -83,7 +68,7 @@
                                     @include('admin.categories.append_categories_level')
                                 </div>
                                 <div class="form-group">
-                                    <label for="category_image">Category Image</label>
+                                    <label for="category_image">Sub-Category Image</label>
                                     <input type="file" class="form-control" id="category_image" name="category_image">
                                     {{-- Show the admin image if exists --}}
                                         {{-- <a target="_blank" href="{{ url('admin/images/photos/' . Auth::guard('admin')->user()->image) }}">View Image</a> <!-- We used    target="_blank"    to open the image in another separate page --> Accessing Specific Guard Instances: https://laravel.com/docs/9.x/authentication#accessing-specific-guard-instances --}}
@@ -95,19 +80,19 @@
                                     @endif
                                 </div>
                                 <div class="form-group">
-                                    <label for="category_discount">Category Discount</label>
-                                    <input type="text" class="form-control" id="category_discount" placeholder="Enter Category Discount" name="category_discount"   @if (!empty($category['category_discount'])) value="{{ $category['category_discount'] }}" @else value="{{ old('category_discount') }}" @endif > 
+                                    <label for="category_discount">Sub-Category Discount</label>
+                                    <input type="text" class="form-control" id="Sub-category_discount" placeholder="Enter Category Discount" name="category_discount"   @if (!empty($category['category_discount'])) value="{{ $category['category_discount'] }}" @else value="{{ old('category_discount') }}" @endif > 
                                 </div>
                                 <div class="form-group">
-                                    <label for="description">Category Description</label>
+                                    <label for="description">Sub-Category Description</label>
                                     {{-- <input type="text" class="form-control" id="category_discount" placeholder="Enter Category Description" name="category_discount"   @if (!empty($category['category_discount'])) value="{{ $category['category_discount'] }}" @else value="{{ old('category_discount') }}" @endif >  --}}
                                     <textarea name="description" id="description" class="form-control" rows="3">{{ $category['description'] }}</textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="url">Category URL</label>
-                                    <input type="text" class="form-control" id="url" placeholder="Enter Category URL" name="url"   @if (!empty($category['url'])) value="{{ $category['url'] }}" @else value="{{ old('url') }}" @endif > 
+                                    <label for="url">Sub-Category URL</label>
+                                    <input type="text" class="form-control" id="url" placeholder="Enter Sub-Category URL" name="url"   @if (!empty($category['url'])) value="{{ $category['url'] }}" @else value="{{ old('url') }}" @endif > 
                                 </div>
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label for="meta_title">Meta Title</label>
                                     <input type="text" class="form-control" id="meta_title" placeholder="Enter Meta Title" name="meta_title"   @if (!empty($category['meta_title'])) value="{{ $category['meta_title'] }}" @else value="{{ old('meta_title') }}" @endif > 
                                 </div>
@@ -118,9 +103,10 @@
                                 <div class="form-group">
                                     <label for="meta_keywords">Meta Keywords</label>
                                     <input type="text" class="form-control" id="meta_keywords" placeholder="Enter Meta Keywords" name="meta_keywords"   @if (!empty($category['meta_keywords'])) value="{{ $category['meta_keywords'] }}" @else value="{{ old('meta_keywords') }}" @endif > 
-                                </div>
+                                </div> --}}
                                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                                <a href="{{url()->previous()}}"  class="btn btn-light">Cancel</a>
+                                {{-- <a href="{{url()->previous()}}"  class="btn btn-light">Cancel</a> --}}
+                                <a href="{{ url('/categories') }}" class="btn btn-light">Cancel</a>
                             </form>
                         </div>
                     </div>

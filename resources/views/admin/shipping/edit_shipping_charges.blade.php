@@ -88,7 +88,8 @@
                                     <input type="text" class="form-control" id="above_5000g" placeholder="Enter Shipping Rate" name="above_5000g" value="{{ $shippingDetails['above_5000g'] }}"> 
                                 </div>
                                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                                <button type="reset"  class="btn btn-light">Cancel</button>
+                                {{-- <button type="reset"  class="btn btn-light">Cancel</button> --}}
+                                <a href="{{ url('/shipping-charges') }}" class="btn btn-light">Cancel</a>
                             </form>
                         </div>
                     </div>

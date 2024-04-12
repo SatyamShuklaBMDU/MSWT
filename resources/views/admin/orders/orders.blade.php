@@ -18,7 +18,7 @@
                                 <table id="orders" class="table table-bordered"> {{-- using the id here for the DataTable --}}
                                     <thead>
                                         <tr>
-                                            <th>Order ID</th>
+                                            <th>Sr. No.</th>
                                             <th>Order Date</th>
                                             <th>Customer Name</th>
                                             <th>Customer Email</th>
@@ -36,7 +36,7 @@
                                         @foreach ($orders as $order)
                                             @if ($order['orders_products']) {{-- If the 'vendor' has ordered products (if a 'vendor' product has been ordered), show them. Check how we constrained the eager loads using a subquery in orders() method in Admin/OrderController.php inside the if condition --}}
                                                 <tr>
-                                                    <td>{{ $order['id'] }}</td>
+                                                    <td>{{ $loop->iteration }}</td>
                                                     <td>{{ date('Y-m-d h:i:s', strtotime($order['created_at'])) }}</td>
                                                     <td>{{ $order['name'] }}</td>
                                                     <td>{{ $order['email'] }}</td>

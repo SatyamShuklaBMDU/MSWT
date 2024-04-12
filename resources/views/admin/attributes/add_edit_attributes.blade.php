@@ -138,10 +138,10 @@
                                 @csrf
 
                                 {{-- DataTable --}}
-                                <table id="products" class="table table-bordered"> {{-- using the id here for the DataTable --}}
+                                <table id="products" class="table table-bordered table-striped"> {{-- using the id here for the DataTable --}}
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th>Sr.No.</th>
                                             <th>Size</th>
                                             <th>SKU</th>
                                             <th>Price</th>
@@ -154,7 +154,7 @@
                                             {{--  <input type="hidden" name="attributeId[]" value="{{ $attribute['id'] }}">  --}} {{-- A hidden input field --}} {{-- IMPORTANT NOTE: DIDN'T WORK INSIDE FOR LOOP!! MUST BE OUSTSIDE IT IN ORDER TO WORK! --}}
                                             <input style="display: none" type="text" name="attributeId[]" value="{{ $attribute['id'] }}"> {{-- A hidden input field --}}
                                             <tr>
-                                                <td>{{ $attribute['id'] }}</td>
+                                                <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $attribute['size'] }}</td>
                                                 <td>{{ $attribute['sku'] }}</td>
                                                 <td>

@@ -24,8 +24,5 @@
             <tr><td>Thanks & Regards,</td></tr>
             <tr><td>Multi-vendor E-commerce Application</td></tr>
         </table>
-
-
-
     </body>
 </html>

@@ -27,7 +27,7 @@
                                 <table id="banners" class="table table-bordered"> {{-- using the id here for the DataTable --}}
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th>Sr. No.</th>
                                             <th>Image</th>
                                             <th>Type</th>
                                             <th>Link</th>
@@ -40,7 +40,7 @@
                                     <tbody>
                                         @foreach ($banners as $banner)
                                             <tr>
-                                                <td>{{ $banner['id'] }}</td>
+                                                <td>{{ $loop->index+1 }}</td>
                                                 <td>
                                                     <img style="width: 180px" src="{{ asset('front/images/banner_images/' . $banner['image']) }}">
                                                 </td>

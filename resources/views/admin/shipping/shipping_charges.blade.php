@@ -10,12 +10,6 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Shipping Charges</h4>
-                            
-
-
-                            {{-- Displaying The Validation Errors: https://laravel.com/docs/9.x/validation#quick-displaying-the-validation-errors AND https://laravel.com/docs/9.x/blade#validation-errors --}}
-                            {{-- Determining If An Item Exists In The Session (using has() method): https://laravel.com/docs/9.x/session#determining-if-an-item-exists-in-the-session --}}
-                            {{-- Our Bootstrap success message in case of updating admin password is successful: --}}
                             @if (Session::has('success_message')) <!-- Check AdminController.php, updateAdminPassword() method -->
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                                     <strong>Success:</strong> {{ Session::get('success_message') }}
@@ -31,7 +25,7 @@
                                 <table id="shipping" class="table table-bordered"> {{-- using the id here for the DataTable --}}
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th>Sr.No.</th>
                                             <th>Country</th>
                                             <th>Rate (0g to 500g)</th>
                                             <th>Rate (501g to 1000g)</th>
@@ -46,7 +40,7 @@
 
                                         @foreach ($shippingCharges as $shipping)
                                             <tr>
-                                                <td>{{ $shipping['id'] }}</td>
+                                                <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $shipping['country'] }}</td>
                                                 <td>{{ $shipping['0_500g'] }}</td>
                                                 <td>{{ $shipping['501g_1000g'] }}</td>
@@ -68,7 +62,6 @@
                                                     <a href="{{ url('/edit-shipping-charges/' . encrypt($shipping['id']) )}}">
                                                         <i style="font-size: 25px" class="mdi mdi-pencil-box"></i> {{-- Icons from Skydash Admin Panel Template --}}
                                                     </a>
-
                                                     {{-- Confirm Deletion JS alert and Sweet Alert --}}
                                                     {{-- <a title="Shipping" class="confirmDelete" href="{{ url('admin/delete-shipping/' . $shipping['id']) }}"> --}}
                                                         {{-- <i style="font-size: 25px" class="mdi mdi-file-excel-box"></i> --}} {{-- Icons from Skydash Admin Panel Template --}}

@@ -79,6 +79,6 @@ Route::namespace('App\Http\Controllers\API')->group(function() { // Route Groups
 
 Route::post('/complaints', [ComplaintController::class, 'store']);
 Route::post('/feedback', [FeedbackController::class, 'store']);
-Route::post('/referrals', [ReferralController::class, 'store']);
+// Route::post('/referrals', [ReferralController::class, 'store']);
 
 

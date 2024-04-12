@@ -81,7 +81,7 @@
                                 <table id="sections" class="table table-bordered"> {{-- using the id here for the DataTable --}}
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th>Sr. No.</th>
                                             <th>Name</th>
                                             <th>Status</th>
                                             <th>Actions</th>
@@ -90,7 +90,7 @@
                                     <tbody>
                                         @foreach ($sections as $section)
                                             <tr>
-                                                <td>{{ $section['id'] }}</td>
+                                                <td>{{ $loop->index + 1 }}</td>
                                                 <td>{{ $section['name'] }}</td>
                                                 <td>
                                                     @if ($section['status'] == 1)
