@@ -209,7 +209,6 @@ class APIController extends Controller
                  'country'    => $userData['country'],
                  'pincode'    => $userData['pincode'],
                  'mobile'    => $userData['mobile'],
-
             ]);
 
 

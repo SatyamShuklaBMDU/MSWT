@@ -158,7 +158,7 @@ Route::prefix('')->namespace('App\Http\Controllers\Admin')->group(function() {
         Route::get('export-subscribers', 'NewsletterController@exportSubscribers');
         // User Ratings & Reviews
         // Render admin/ratings/ratings.blade.php page in the Admin Panel
-        Route::get('ratings', 'RatingController@ratings');
+    Route::get('ratings', 'RatingController@ratings');
         // Update Rating Status (active/inactive) via AJAX in admin/ratings/ratings.blade.php, check admin/js/custom.js
         Route::post('update-rating-status', 'RatingController@updateRatingStatus');
         // Delete a Rating via AJAX in admin/ratings/ratings.blade.php, check admin/js/custom.js

@@ -1,6 +1,4 @@
 @extends('admin.layout.layout')
-
-
 @section('content')
     <div class="main-panel">
         <div class="content-wrapper">
@@ -31,6 +29,7 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
+                                            <th>Created Date</th>
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Role</th>
@@ -42,6 +41,7 @@
                                         @foreach ($admins as $item)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $item->created_at }}</td>
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->email }}</td>
                                                 <td>{{ $item->type }}</td>

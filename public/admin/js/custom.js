@@ -459,7 +459,8 @@ $(document).ready(function () {
             url: '/update-filter-status', // check the web.php for this route and check the ProductsController for the updateFilterStatus() method
             data: { status: status, filter_id: filter_id }, // we pass the status and filter_id
             success: function (resp) {
-                if (resp.status == 0) { // in case of success, reverse the status (active/inactive) and show the right icon in the frontend    // Or the same    if (resp['status'] == 0) {
+                if (resp.status == 0) { 
+                    // in case of success, reverse the status (active/inactive) and show the right icon in the frontend    // Or the same    if (resp['status'] == 0) {
                     $('#filter-' + filter_id).html('<i style="font-size: 25px" class="mdi mdi-bookmark-outline" status="Inactive"></i>');
                     Swal.fire({
                         position: "top-end",

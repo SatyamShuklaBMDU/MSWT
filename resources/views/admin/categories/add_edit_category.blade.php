@@ -56,9 +56,9 @@
                                     <input type="text" class="form-control" id="category_name" placeholder="Enter Sub-Category Name" name="category_name" @if (!empty($category['category_name'])) value="{{ $category['category_name'] }}" @else value="{{ old('category_name') }}" @endif> 
                                 </div>
                                 <div class="form-group">
-                                    <label for="section_id">Select Section</label>
+                                    <label for="section_id">Select Category Section</label>
                                     <select name="section_id" id="section_id" class="form-control" style="color: #000">
-                                        <option value="">Select Section</option>
+                                        <option value="">Select Category Section</option>
                                         @foreach ($getSections as $section)
                                             <option value="{{ $section['id'] }}"  @if (!empty($category['section_id']) && $category['section_id'] == $section['id']) selected @endif >{{ $section['name'] }}</option>
                                         @endforeach
